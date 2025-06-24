@@ -1,123 +1,79 @@
+# Criar HTML minimizado e convertível
+html = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>No Luck. Only Edge.</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* ========  PALETA & VARIÁVEIS  ======== */
-    :root {
-      --bg:        #041218;
-      --teal:      #00FFD0;
-      --teal-dark: #008155;
-      --gold:      #FFD700;
-      --gold-dark: #B8860B;
-      --purple:    #8C52FF;
-      --white:     #FFFFFF;
-      --grey:      #A7B2BB;
-      --radius:    16px;
-    }
-
-    /* ========  RESET BÁSICO  ======== */
-    * { box-sizing:border-box; margin:0; padding:0 }
-
-    body {
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      background:var(--bg);
-      color:var(--white);
-      font-family:'Barlow Condensed',sans-serif;
-      animation:fadeIn .4s ease both;
-      padding:32px 16px;
-      text-align:center;
-    }
-
-    /* ========  TIPOGRAFIA  ======== */
-    h1 {
-      font-size:36px;
-      line-height:1.1;
-      font-weight:700;
-      color:var(--teal);
-      margin-bottom:8px;
-    }
-    @media (min-width:600px){ h1{font-size:48px} }
-
-    .sub { font-size:18px; color:var(--grey); margin-bottom:28px }
-
-    /* ========  BOTÕES  ======== */
-    .btn {
-      display:block;
-      width:100%; max-width:420px;
-      padding:22px;
-      margin:16px auto 0;
-      font-size:1.3rem; font-weight:600; text-decoration:none;
-      color:var(--bg);
-      border-radius:var(--radius);
-      transition:transform .18s, box-shadow .18s;
-    }
-    .btn:hover{ transform:scale(1.03) }
-
-    .gto   { background:linear-gradient(135deg,var(--teal),var(--teal-dark)); box-shadow:0 0 6px rgba(0,255,208,.5) inset }
-    .gto:hover{ box-shadow:0 0 12px rgba(0,255,208,.85) inset }
-
-    .acr   { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); box-shadow:0 0 6px rgba(255,215,0,.4) inset }
-    .acr:hover{ box-shadow:0 0 12px rgba(255,215,0,.8) inset }
-
-    .amazon{ background:linear-gradient(135deg,var(--purple),var(--teal)); box-shadow:0 0 6px rgba(140,82,255,.4) inset }
-    .amazon:hover{ box-shadow:0 0 12px rgba(140,82,255,.8) inset }
-
-    /* ========  TEXTO AUXILIAR  ======== */
-    .helper { font-size:12px; color:var(--grey); margin-top:4px }
-
-    footer { margin-top:40px; font-size:12px; color:var(--grey) }
-
-    /* ========  ANIMAÇÃO  ======== */
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>No Luck. Only Edge.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#041218;
+  --teal:#00FFD0;
+  --teal-dark:#008155;
+  --gold:#FFD700;
+  --gold-dark:#B8860B;
+  --purple:#8C52FF;
+  --white:#fff;
+  --grey:#A7B2BB;
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  background:var(--bg);color:var(--white);font-family:'Barlow Condensed',sans-serif;
+  padding:40px 16px;text-align:center;
+}
+.container{width:100%;max-width:420px}
+h1{color:var(--teal);font-size:40px;line-height:1.1;font-weight:700;margin-bottom:6px}
+@media(min-width:600px){h1{font-size:52px}}
+.sub{color:var(--grey);font-size:20px;margin-bottom:26px;font-weight:400}
+.btn{
+  display:block;width:100%;padding:22px;margin:14px 0;border-radius:var(--radius);
+  font-size:1.4rem;font-weight:600;text-decoration:none;color:var(--bg);
+  transition:transform .17s,box-shadow .17s;
+}
+.btn:hover{transform:scale(1.04)}
+.gto{background:linear-gradient(135deg,var(--teal),var(--teal-dark));box-shadow:0 0 6px rgba(0,255,208,.5) inset}
+.gto:hover{box-shadow:0 0 12px rgba(0,255,208,.85) inset}
+.acr{background:linear-gradient(135deg,var(--gold),var(--gold-dark));box-shadow:0 0 6px rgba(255,215,0,.5) inset}
+.acr:hover{box-shadow:0 0 12px rgba(255,215,0,.85) inset}
+.amazon{background:linear-gradient(135deg,var(--purple),var(--teal));box-shadow:0 0 6px rgba(140,82,255,.5) inset}
+.amazon:hover{box-shadow:0 0 12px rgba(140,82,255,.85) inset}
+.helper{font-size:12px;color:var(--grey);margin-top:-10px;margin-bottom:12px}
+.secondary{
+  display:inline-block;margin:8px 4px;padding:10px 18px;border-radius:var(--radius);
+  background:#2a2f33;color:var(--white);font-size:1rem;text-decoration:none;
+}
+footer{margin-top:30px;font-size:12px;color:var(--grey)}
+</style>
 </head>
-
 <body>
+<main class="container">
+  <h1>No Luck. Only Edge.</h1>
+  <p class="sub">Study smarter · Play harder · Gear up</p>
 
-  <main>
-    <h1>No Luck. Only Edge.</h1>
-    <p class="sub">Study smarter · Play harder · Gear up</p>
+  <a class="btn gto" href="https://rebrand.ly/gto-nloe" target="_blank" rel="noopener">🧠 Study with GTO Wizard – 10 % OFF</a>
 
-    <!-- BOTÕES COM LINKS REAIS (Rebrandly) -->
-    <a class="btn gto" href="https://rebrand.ly/gto-nloe" target="_blank" rel="noopener">
-      🧠  Study with GTO&nbsp;Wizard – 10 % OFF
-    </a>
+  <a class="btn acr" href="https://rebrand.ly/acr-nloe" target="_blank" rel="noopener">💰 Play on ACR – 100 % Bonus up to $2 000</a>
+  <p class="helper">Only new accounts · Clear cookies first</p>
 
-    <a class="btn acr" href="https://rebrand.ly/acr-nloe" target="_blank" rel="noopener">
-      💰  Play on ACR – 100 % Bonus up to $2 000
-    </a>
-    <p class="helper">Only new accounts · Clear cookies first</p>
+  <a class="btn amazon" href="https://amzn.to/43XBK95" target="_blank" rel="noopener">🛒 Grab Your Poker Gear on Amazon</a>
 
-    <a class="btn amazon" href="https://amzn.to/43XBK95" target="_blank" rel="noopener">
-      🛒  Grab Your Poker Gear on Amazon
-    </a>
-  </main>
-
-  <footer>
-    18+ | Gamble responsibly | Offers may be unavailable in some regions
-  </footer>
-
-  <!-- Google Analytics 4 (substitui pelo teu ID e remove comentários) -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  -->
-
+  <a class="secondary" href="https://www.instagram.com/noluckonlyedge" target="_blank" rel="noopener">📩 Private coaching?</a>
+  <a class="secondary" href="https://www.youtube.com/@antoniomarques4681" target="_blank" rel="noopener">🎵 Music by António Marques</a>
+</main>
+<footer>
+  18+ | Gamble responsibly | Offers may vary by region
+</footer>
 </body>
 </html>
+"""
+
+output_path = "/mnt/data/nloe_final_clean.html"
+with open(output_path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+output_path
