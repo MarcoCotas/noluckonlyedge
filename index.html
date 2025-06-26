@@ -38,6 +38,7 @@
       gtag("js", new Date());
       gtag("config", "G-KQQRNDM3HH");
 
+      // Função corrigida - apenas UM evento por clique
       function trackClick(type) {
         const values = {
           gto: 10,
@@ -46,14 +47,11 @@
           amazon: 5,
         };
 
+        // Enviar apenas o evento principal
         gtag("event", "affiliate_click", {
           event_category: "conversions",
           event_label: type,
           value: values[type] || 1,
-        });
-
-        gtag("event", type + "_clicked", {
-          event_category: "outbound",
         });
       }
 
@@ -105,8 +103,16 @@
       .tagline {
         text-align: center;
         color: #8b95a1;
-        font-size: 22px;
+        font-size: 20px;
         margin-bottom: 40px;
+        line-height: 1.5;
+      }
+
+      .tagline strong {
+        color: #fff;
+        font-size: 22px;
+        display: block;
+        margin-bottom: 8px;
       }
 
       .trust {
@@ -137,6 +143,9 @@
         transition: all 0.3s;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 380px;
       }
 
       .card::before {
@@ -207,6 +216,7 @@
         font-size: 18px;
         line-height: 1.6;
         margin-bottom: 28px;
+        flex: 1;
       }
 
       .cta {
@@ -219,6 +229,7 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: all 0.2s;
+        margin-top: auto;
       }
 
       .cta-green {
@@ -239,6 +250,29 @@
       .cta:hover {
         transform: scale(1.05);
         box-shadow: 0 0 30px rgba(0, 255, 208, 0.5);
+      }
+
+      .amazon-card {
+        max-width: 600px;
+        margin: 0 auto 40px;
+        min-height: auto;
+      }
+
+      .help-text {
+        text-align: center;
+        margin-top: 20px;
+        color: #8b95a1;
+        font-size: 18px;
+      }
+
+      .help-text a {
+        color: #00ffd0;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .help-text a:hover {
+        text-decoration: underline;
       }
 
       footer {
@@ -270,6 +304,15 @@
 
         .card {
           padding: 28px;
+          min-height: auto;
+        }
+
+        .tagline {
+          font-size: 18px;
+        }
+
+        .tagline strong {
+          font-size: 20px;
         }
       }
     </style>
@@ -277,7 +320,13 @@
   <body>
     <div class="container">
       <h1>No Luck. Only Edge.</h1>
-      <p class="tagline">Master Strategy · Win Consistently · Level Up</p>
+      <p class="tagline">
+        <strong
+          >📺 You saw the clips. Now it's time to win like the pros.</strong
+        >
+        New to poker? Start crushing with the tools and strategy trusted by
+        thousands of winning players.
+      </p>
 
       <div class="trust">
         <strong style="color: #00ffd0"
@@ -292,8 +341,8 @@
           <h2>Study with GTO Wizard</h2>
           <span class="badge">10% OFF - EXCLUSIVE</span>
           <p>
-            The #1 solver-based training tool. Master GTO strategy that actually
-            works.
+            Crush your leaks with the same GTO trainer used by the top regs.
+            Instant access + 10% discount – only available through this link.
           </p>
           <a
             href="https://gtowizard.com/p/noluckonlyedge?utm_source=youtube&utm_medium=affiliate&utm_campaign=shorts&utm_content=landing"
@@ -311,8 +360,8 @@
           <h2>Play on ACR</h2>
           <span class="badge">100% BONUS UP TO $2,000</span>
           <p>
-            Best action, softest games, fastest cashouts. Join the winning
-            players.
+            Double your bankroll with 100% deposit bonus up to $2,000. Softest
+            fields in online poker + fastest cashouts in the game.
           </p>
           <a
             href="https://go.wpnaffiliates.com/visit/?bta=236742&brand=americascardroom&utm_source=youtube&utm_medium=affiliate&utm_campaign=shorts&utm_content=landing"
@@ -330,7 +379,8 @@
           <h2>FREE Leak-Finding Session</h2>
           <span class="badge badge-red">LIMITED TIME</span>
           <p>
-            Find your biggest leak in 15min. No spam, just strategy on Discord.
+            Your biggest leak fixed in 15 minutes. Get a free 1-on-1 session
+            with a winning player. No pressure, no spam – just pure edge.
           </p>
           <a
             href="https://discord.com/users/marcocotas"
@@ -344,9 +394,12 @@
       </div>
 
       <!-- Amazon Section -->
-      <div class="card" style="max-width: 600px; margin: 0 auto 40px">
+      <div class="card amazon-card">
         <h2>📚 Poker Books & Gear</h2>
-        <p>Shop recommended equipment on Amazon</p>
+        <p>
+          Level up your grind setup 🎧🃏 From card decks to headsets – all
+          pro-tested gear in one place.
+        </p>
         <a
           href="https://amzn.to/43XBK95?utm_source=youtube&utm_medium=affiliate&utm_campaign=shorts&utm_content=amazon"
           class="cta cta-gradient"
@@ -356,6 +409,18 @@
           SHOP NOW →
         </a>
       </div>
+
+      <p class="help-text">
+        Not sure where to start?
+        <a
+          href="https://discord.com/users/marcocotas"
+          target="_blank"
+          onclick="trackClick('coaching')"
+        >
+          Message me on Discord
+        </a>
+        and I'll point you in the right direction.
+      </p>
 
       <footer>
         <p>
