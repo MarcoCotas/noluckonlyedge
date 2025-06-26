@@ -19,13 +19,14 @@
       property="og:description"
       content="Free coaching + exclusive poker deals. Start winning today."
     />
+
     <link
       rel="icon"
       type="image/svg+xml"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23041218'/><circle cx='50' cy='50' r='40' fill='none' stroke='%2300FFD0' stroke-width='3'/><text x='50' y='65' font-size='40' fill='%2300FFD0' text-anchor='middle' font-family='Arial' font-weight='bold'>♠</text></svg>"
     />
 
-    <!-- Google Analytics 4 Enhanced -->
+    <!-- Google Analytics 4 com Rate Limiting -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-KQQRNDM3HH"
@@ -38,28 +39,59 @@
       gtag("js", new Date());
       gtag("config", "G-KQQRNDM3HH");
 
-      // Função corrigida - apenas UM evento por clique
+      // PROTEÇÃO ANTI-SPAM: Rate Limiting
+      let clickCount = 0;
+      let lastReset = Date.now();
+      let lastClickTime = 0;
+
       function trackClick(type) {
-        const values = {
-          gto: 10,
-          acr: 125,
-          coaching: 50,
-          amazon: 5,
+        const now = Date.now();
+
+        // Reset contador a cada minuto
+        if (now - lastReset > 60000) {
+          clickCount = 0;
+          lastReset = now;
+        }
+
+        // Bloqueia se mais de 10 cliques por minuto
+        if (clickCount >= 10) {
+          console.warn("Rate limit: Too many clicks");
+          return false;
+        }
+
+        // Bloqueia cliques muito rápidos (menos de 500ms)
+        if (now - lastClickTime < 500) {
+          console.warn("Click too fast - possible bot");
+          return false;
+        }
+
+        // Atualiza contadores
+        clickCount++;
+        lastClickTime = now;
+
+        // Nomes dos eventos
+        const eventNames = {
+          wizard: "Click_Wizard",
+          acr: "Click_ACR",
+          discord: "Click_Discord",
+          amazon: "Click_Amazon",
+          music: "Click_Music",
         };
 
-        // Enviar apenas o evento principal
-        gtag("event", "affiliate_click", {
-          event_category: "conversions",
+        // Envia evento
+        gtag("event", eventNames[type] || "Click_Unknown", {
+          event_category: "Affiliate_Links",
           event_label: type,
-          value: values[type] || 1,
+          timestamp: now,
         });
+
+        return true;
       }
 
-      // Engagement tracking
+      // Tracking de engajamento
       setTimeout(() => {
-        gtag("event", "engaged_user", {
-          event_category: "engagement",
-          event_label: "10_seconds",
+        gtag("event", "User_Engaged_10s", {
+          event_category: "Engagement",
         });
       }, 10000);
     </script>
@@ -344,10 +376,20 @@
             Crush your leaks with the same GTO trainer used by the top regs.
             Instant access + 10% discount – only available through this link.
           </p>
+          <small
+            style="
+              display: block;
+              color: #8b95a1;
+              font-size: 14px;
+              margin-top: -10px;
+            "
+          >
+            *New accounts only
+          </small>
           <a
             href="https://gtowizard.com/p/noluckonlyedge?utm_source=youtube&utm_medium=affiliate&utm_campaign=shorts&utm_content=landing"
             class="cta cta-green"
-            onclick="trackClick('gto')"
+            onclick="trackClick('wizard')"
             target="_blank"
           >
             START LEARNING →
@@ -363,6 +405,16 @@
             Double your bankroll with 100% deposit bonus up to $2,000. Softest
             fields in online poker + fastest cashouts in the game.
           </p>
+          <small
+            style="
+              display: block;
+              color: #8b95a1;
+              font-size: 14px;
+              margin-top: -10px;
+            "
+          >
+            *New accounts only • Clear cookies first
+          </small>
           <a
             href="https://go.wpnaffiliates.com/visit/?bta=236742&brand=americascardroom&utm_source=youtube&utm_medium=affiliate&utm_campaign=shorts&utm_content=landing"
             class="cta cta-gold"
@@ -372,7 +424,6 @@
             CLAIM BONUS →
           </a>
         </div>
-
         <!-- Coaching Card -->
         <div class="card">
           <span class="icon">🎯</span>
@@ -385,7 +436,7 @@
           <a
             href="https://discord.com/users/marcocotas"
             class="cta cta-gradient"
-            onclick="trackClick('coaching')"
+            onclick="trackClick('discord')"
             target="_blank"
           >
             💬 GET FREE SESSION →
@@ -415,7 +466,7 @@
         <a
           href="https://discord.com/users/marcocotas"
           target="_blank"
-          onclick="trackClick('coaching')"
+          onclick="trackClick('discord')"
         >
           Message me on Discord
         </a>
@@ -424,13 +475,13 @@
 
       <footer>
         <p>
-          <a href="https://www.youtube.com/@antoniomarques4681" target="_blank">
+          <a
+            href="https://www.youtube.com/@antoniomarques4681"
+            target="_blank"
+            onclick="trackClick('music')"
+          >
             🎵 Music by António Marques
           </a>
-        </p>
-        <p style="margin-top: 10px">
-          18+ | Gamble responsibly | This page contains affiliate links | © 2024
-          No Luck Only Edge
         </p>
       </footer>
     </div>
